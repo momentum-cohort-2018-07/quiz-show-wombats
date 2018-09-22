@@ -116,7 +116,7 @@ Response:
   "data": {
     "totalItems": 10,
     "items": [
-      {"id": 1, "title": "JS Arrays", "is_published": true, "questionCount": 4},
+      {"id": 1, "title": "JS Arrays", "isPublished": true, "questionCount": 4},
       ...
     ]
   }
