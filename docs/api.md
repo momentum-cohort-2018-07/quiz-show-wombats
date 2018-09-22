@@ -105,3 +105,52 @@ Response:
   }
 }
 ```
+
+## GET /quizzes
+
+Response:
+
+```
+200 OK
+{
+  "data": {
+    "totalItems": 10,
+    "items": [
+      {"id": 1, "title": "JS Arrays", "is_published": true, "questionCount": 4},
+      ...
+    ]
+  }
+}
+```
+
+### Notes
+
+* unpublished quizzes will only be shown to admins
+* come back and add `prevScore` when we start collecting those
+* add paging later
+
+## GET /quizzes/1
+
+Response:
+
+```
+200 OK
+{
+  "data": {
+    "id": 1,
+    "title": "JS Arrays",
+    "is_published": true,
+    "questions": [
+      {
+        "id": 1,
+        "text": "What function is used to return a subset of an array?",
+        "answers": [
+          { "id": 1, "text": "map" },
+          { "id": 2, "text": "filter" },
+          { "id": 3, "text": "reduce" }
+        ]
+      }
+    ]
+  }
+}
+```
