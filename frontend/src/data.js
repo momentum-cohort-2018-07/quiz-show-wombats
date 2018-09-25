@@ -6,6 +6,7 @@ const api = (path) => `${apiHost}/${path}`
 let userToken
 
 function sendAuth (req) {
+  console.log(userToken)
   if (userToken) {
     return req.set('Authorization', `Bearer ${userToken}`)
   } else {
@@ -24,6 +25,7 @@ const data = {
     return request.post(api('login'))
       .send({ email, password })
       .then(res => res.body.data)
+      .then(data => ({ email: data.email, token: data.auth_token }))
       .then(user => {
         data.setUserToken(user.token)
         return user

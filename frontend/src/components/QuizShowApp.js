@@ -36,12 +36,18 @@ class QuizShowApp extends Component {
     })
   }
 
+  logout () {
+    window.localStorage.removeItem('email')
+    window.localStorage.removeItem('token')
+    this.setState({ currentUser: null })
+  }
+
   render () {
     const { currentUser } = this.state
     return (
       <Router>
         <div className='QuizShowApp'>
-          <Navigation currentUser={currentUser} />
+          <Navigation currentUser={currentUser} onLogout={e => this.logout()} />
           <Section>
             <Container>
               <Route exact path='/' render={() =>

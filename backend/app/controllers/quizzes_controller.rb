@@ -1,4 +1,6 @@
 class QuizzesController < ApplicationController
+  before_action :authenticate_user, only: [:show, :score]
+
   def index
     @quizzes = Quiz.where(is_published: true).includes(:questions)
   end

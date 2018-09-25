@@ -23,7 +23,7 @@ class Navigation extends React.Component {
   }
 
   render () {
-    const { currentUser } = this.props
+    const { currentUser, onLogout } = this.props
     return (
       <Navbar>
         <Container>
@@ -38,11 +38,8 @@ class Navigation extends React.Component {
           <NavbarMenu isActive={this.state.isActive} onClick={this.onClickNav}>
             <NavbarEnd>
               {currentUser
-                ? <NavbarItem>Logged in as {currentUser.email}</NavbarItem>
-                : <React.Fragment>
-                  <NavbarItem><NavLink to='/login'>Log in</NavLink></NavbarItem>
-                  <NavbarItem><NavLink to='/register'>Register</NavLink></NavbarItem>
-                </React.Fragment>}
+                ? <LoggedInMenu currentUser={currentUser} onLogout={onLogout} />
+                : <LoggedOutMenu />}
             </NavbarEnd>
           </NavbarMenu>
         </Container>
@@ -54,5 +51,19 @@ class Navigation extends React.Component {
 Navigation.propTypes = {
   currentUser: UserPropType
 }
+
+const LoggedInMenu = ({ currentUser, onLogout }) => (
+  <React.Fragment>
+    <NavbarItem>Logged in as {currentUser.email}</NavbarItem>
+    <NavbarItem><a onClick={onLogout}>Log out</a></NavbarItem>
+  </React.Fragment>
+)
+
+const LoggedOutMenu = () => (
+  <React.Fragment>
+    <NavbarItem><NavLink to='/login'>Log in</NavLink></NavbarItem>
+    <NavbarItem><NavLink to='/register'>Register</NavLink></NavbarItem>
+  </React.Fragment>
+)
 
 export default Navigation
