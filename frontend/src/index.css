@@ -10,10 +10,6 @@ body {
   margin-bottom: 2rem;
 }
 
-.Question:last-of-type {
-  border-bottom-width: 0;
-}
-
 .Answers {
   padding: 0 2rem;
 }

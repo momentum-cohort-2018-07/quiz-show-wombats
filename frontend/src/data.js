@@ -63,6 +63,20 @@ const data = {
   getQuiz: (id) => {
     return sendAuth(request.get(api(`quizzes/${id}`)))
       .then(res => res.body.data)
+  },
+  scoreQuiz: (quizId, answers) => {
+    return sendAuth(request.post(api(`quizzes/${quizId}/score`)))
+      .send({ answers })
+      .then(res => res.body.data)
+      .catch(err => {
+        if (err.response.statusCode === 422) {
+          const errors = err.response.body.errors
+          console.log(errors)
+          throw new Error(errors[0])
+        } else {
+          throw new Error('There was a problem communicating with the server.')
+        }
+      })
   }
 }
 
