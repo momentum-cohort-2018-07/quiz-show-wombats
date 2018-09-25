@@ -21,17 +21,20 @@ class QuizzesController < ApplicationController
       return
     end      
 
-    score = 0
+    correct = 0
     answers.each_pair do |question_id, answer_id|
       question = quiz.questions.find(question_id)
       if question.correct_answer.id.to_s == answer_id.to_s
-        score += 1
+        correct += 1
       end
     end
 
+    score = Score.new(user: current_user, quiz: quiz, correct: correct, total: quiz.questions.count)
+    score.save
+
     render json: {
       data: {
-        correct: score,
+        correct: correct,
         total: quiz.questions.count
       }
     }

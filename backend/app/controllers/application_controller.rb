@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::API
+  helper_method :current_user
+
   def authenticate_user
     unless current_user
       head :forbidden

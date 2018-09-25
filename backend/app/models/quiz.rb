@@ -11,6 +11,11 @@
 
 class Quiz < ApplicationRecord
   has_many :questions
+  has_many :scores
   
   validates :title, presence: true
+
+  def prev_score(user)
+    scores.where(user: user).order(created_at: :desc).first
+  end
 end
