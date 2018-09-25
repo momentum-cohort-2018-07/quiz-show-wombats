@@ -8,6 +8,8 @@ import Guard from './Guard'
 import Login from './Login'
 import Navigation from './Navigation'
 import Register from './Register'
+import Quiz from './Quiz'
+import FetchQuiz from './FetchQuiz'
 
 class QuizShowApp extends Component {
   constructor () {
@@ -44,7 +46,13 @@ class QuizShowApp extends Component {
             <Container>
               <Route exact path='/' render={() =>
                 <FetchQuizzes render={({ quizzes }) =>
-                  <Dashboard quizzes={quizzes} />} />} />
+                  <Dashboard loggedIn={!!currentUser} quizzes={quizzes} />} />} />
+              <Route path='/quizzes/:id' render={({ match }) =>
+                <Guard condition={currentUser} redirectTo='/login'>
+                  <FetchQuiz
+                    id={match.params.id}
+                    render={({ quiz }) => <Quiz quiz={quiz} />} />
+                </Guard>} />
               <Route path='/login' render={() =>
                 <Guard condition={!currentUser} redirectTo='/'>
                   <Login setCurrentUser={this.setCurrentUser} />

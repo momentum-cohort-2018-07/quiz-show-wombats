@@ -4,7 +4,7 @@ import {
   Container,
   Title
 } from 'bloomer'
-import { NavLink } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 
 import { UserPropType } from '../commonPropTypes'
 
@@ -29,7 +29,9 @@ class Navigation extends React.Component {
         <Container>
           <NavbarBrand>
             <NavbarItem>
-              <Title isSize='3'>QuizShow</Title>
+              <Title isSize='3'>
+                <Link to='/'>QuizShow</Link>
+              </Title>
             </NavbarItem>
             <NavbarBurger isActive={this.state.isActive} onClick={this.onClickNav} />
           </NavbarBrand>

@@ -3,3 +3,25 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
+.Question {
+  padding-bottom: 2rem;
+  border-bottom: 1px solid lightgray;
+  margin-bottom: 2rem;
+}
+
+.Question:last-of-type {
+  border-bottom-width: 0;
+}
+
+.Answers {
+  padding: 0 2rem;
+}
+
+.Answers input[type="radio"] {
+  margin-right: 1rem;
+}
+
+.Answers .markdown {
+  display: inline;
+}

@@ -59,6 +59,10 @@ const data = {
   getQuizzes: () => {
     return sendAuth(request.get(api('quizzes')))
       .then(res => res.body.data.items)
+  },
+  getQuiz: (id) => {
+    return sendAuth(request.get(api(`quizzes/${id}`)))
+      .then(res => res.body.data)
   }
 }
 
