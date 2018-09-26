@@ -55,6 +55,15 @@ class QuizShowApp extends Component {
 
   render () {
     const { currentUser, userLoaded } = this.state
+    if (!userLoaded) {
+      return (
+        <Router>
+          <div className='QuizShowApp'>
+            <Navigation userLoaded={userLoaded} currentUser={currentUser} onLogout={e => this.logout()} />
+          </div>
+        </Router>
+      )
+    }
     return (
       <Router>
         <div className='QuizShowApp'>
@@ -65,18 +74,18 @@ class QuizShowApp extends Component {
                 <FetchQuizzes render={({ quizzes, loading }) =>
                   <Dashboard loggedIn={!!currentUser} loading={loading} quizzes={quizzes} />} />} />
               <Route path='/quizzes/:id' render={({ match }) =>
-                <Guard condition={!userLoaded || currentUser} redirectTo='/login'>
+                <Guard condition={currentUser} redirectTo='/login'>
                   <FetchQuiz
                     id={match.params.id}
                     render={({ quiz, loading }) => <Quiz loading={loading} quiz={quiz} />} />
                 </Guard>} />
               <Route path='/login' render={() =>
-                <Guard condition={!userLoaded || !currentUser} redirectTo='/'>
+                <Guard condition={!currentUser} redirectTo='/'>
                   <Login setCurrentUser={this.setCurrentUser} />
                 </Guard>
               } />
               <Route path='/register' render={() =>
-                <Guard condition={!userLoaded || !currentUser} redirectTo='/'>
+                <Guard condition={!currentUser} redirectTo='/'>
                   <Register setCurrentUser={this.setCurrentUser} />
                 </Guard>
               } />

@@ -23,7 +23,7 @@ class Navigation extends React.Component {
   }
 
   render () {
-    const { currentUser, onLogout } = this.props
+    const { userLoaded, currentUser, onLogout } = this.props
     return (
       <Navbar>
         <Container>
@@ -35,6 +35,7 @@ class Navigation extends React.Component {
             </NavbarItem>
             <NavbarBurger isActive={this.state.isActive} onClick={this.onClickNav} />
           </NavbarBrand>
+          {userLoaded &&
           <NavbarMenu isActive={this.state.isActive} onClick={this.onClickNav}>
             <NavbarEnd>
               {currentUser
@@ -42,6 +43,7 @@ class Navigation extends React.Component {
                 : <LoggedOutMenu />}
             </NavbarEnd>
           </NavbarMenu>
+          }
         </Container>
       </Navbar>
     )
