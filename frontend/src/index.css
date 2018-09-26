@@ -10,6 +10,10 @@ body {
   margin-bottom: 2rem;
 }
 
+.QuizLink {
+  margin-bottom: 1rem;
+}
+
 .Answers {
   padding: 0 2rem;
 }
