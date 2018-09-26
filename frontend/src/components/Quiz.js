@@ -42,7 +42,7 @@ class Quiz extends React.Component {
   }
 
   render () {
-    const { quiz } = this.props
+    const { quiz, loading } = this.props
     const { errorMsg, score } = this.state
 
     if (score) {
@@ -53,6 +53,10 @@ class Quiz extends React.Component {
           <p><Link to='/'>Take another quiz.</Link></p>
         </div>
       )
+    }
+
+    if (loading) {
+      return <div className='loader is-size-1' />
     }
 
     return (

@@ -51,13 +51,13 @@ class QuizShowApp extends Component {
           <Section>
             <Container>
               <Route exact path='/' render={() =>
-                <FetchQuizzes render={({ quizzes }) =>
-                  <Dashboard loggedIn={!!currentUser} quizzes={quizzes} />} />} />
+                <FetchQuizzes render={({ quizzes, loading }) =>
+                  <Dashboard loggedIn={!!currentUser} loading={loading} quizzes={quizzes} />} />} />
               <Route path='/quizzes/:id' render={({ match }) =>
                 <Guard condition={currentUser} redirectTo='/login'>
                   <FetchQuiz
                     id={match.params.id}
-                    render={({ quiz }) => <Quiz quiz={quiz} />} />
+                    render={({ quiz, loading }) => <Quiz loading={loading} quiz={quiz} />} />
                 </Guard>} />
               <Route path='/login' render={() =>
                 <Guard condition={!currentUser} redirectTo='/'>

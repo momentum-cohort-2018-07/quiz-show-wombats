@@ -5,11 +5,13 @@ import { Link } from 'react-router-dom'
 
 class Dashboard extends React.Component {
   render () {
-    const { quizzes, loggedIn } = this.props
+    const { quizzes, loading, loggedIn } = this.props
     return (
       <div className='Dashboard'>
         <Subtitle>Available quizzes</Subtitle>
-        {quizzes.map(quiz => <div key={quiz.id}><QuizLink loggedIn={loggedIn} quiz={quiz} /></div>)}
+        {loading
+          ? <div className='loader is-size-1' />
+          : quizzes.map(quiz => <div key={quiz.id}><QuizLink loggedIn={loggedIn} quiz={quiz} /></div>)}
       </div>
     )
   }
@@ -23,9 +25,11 @@ const QuizLink = ({ loggedIn, quiz }) => {
           <Link to={`/quizzes/${quiz.id}`}>
             <span className='is-size-5'>{quiz.title}</span>
           </Link>
+          &nbsp;
+          <span className='QuizLink__question-count'>{quiz.questionCount} questions</span>
           <br />
-          {quiz.prevScore
-            ? <span>Previous score: {percent(quiz.prevScore)}</span>
+          {quiz.bestScore
+            ? <span>Best score: {percent(quiz.bestScore)}</span>
             : <span>Not previously taken</span>}
         </React.Fragment>
         : <span className='is-size-5'>{quiz.title}</span>}

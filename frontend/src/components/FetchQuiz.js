@@ -6,17 +6,17 @@ class FetchQuiz extends React.Component {
   constructor () {
     super()
     this.state = {
-      quiz: {}
+      quiz: {},
+      loading: true
     }
   }
 
   componentDidMount () {
-    data.getQuiz(this.props.id).then(quiz => this.setState({ quiz }))
+    data.getQuiz(this.props.id).then(quiz => this.setState({ quiz, loading: false }))
   }
 
   render () {
-    const { quiz } = this.state
-    return this.props.render({ quiz })
+    return this.props.render(this.state)
   }
 }
 

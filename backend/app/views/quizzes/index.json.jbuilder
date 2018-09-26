@@ -5,7 +5,8 @@ json.data do
     json.questionCount quiz.questions.count
     json.isPublished quiz.is_published
     if current_user
-      json.prevScore quiz.prev_score(current_user).try(:percent)
+      json.lastScore quiz.last_score(current_user).try(:percent)
+      json.bestScore quiz.best_score(current_user).try(:percent)
     end
   end
 end

@@ -15,7 +15,11 @@ class Quiz < ApplicationRecord
   
   validates :title, presence: true
 
-  def prev_score(user)
+  def last_score(user)
     scores.where(user: user).order(created_at: :desc).first
+  end
+
+  def best_score(user)
+    scores.where(user: user).order(correct: :desc).first
   end
 end
