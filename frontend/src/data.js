@@ -6,7 +6,6 @@ const api = (path) => `${apiHost}/${path}`
 let userToken
 
 function sendAuth (req) {
-  console.log(userToken)
   if (userToken) {
     return req.set('Authorization', `Bearer ${userToken}`)
   } else {
@@ -33,7 +32,6 @@ const data = {
       .catch(err => {
         if (err.response.statusCode === 422) {
           const errors = err.response.body.errors
-          console.log(errors)
           throw new Error(errors[0])
         } else {
           throw new Error('There was a problem communicating with the server.')
@@ -51,7 +49,6 @@ const data = {
       .catch(err => {
         if (err.response.statusCode === 422) {
           const errors = err.response.body.errors
-          console.log(errors)
           throw new Error(errors[0])
         } else {
           throw new Error('There was a problem communicating with the server.')
@@ -73,7 +70,6 @@ const data = {
       .catch(err => {
         if (err.response.statusCode === 422) {
           const errors = err.response.body.errors
-          console.log(errors)
           throw new Error(errors[0])
         } else {
           throw new Error('There was a problem communicating with the server.')

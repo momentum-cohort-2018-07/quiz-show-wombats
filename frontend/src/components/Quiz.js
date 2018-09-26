@@ -43,7 +43,7 @@ class Quiz extends React.Component {
 
   render () {
     const { quiz, loading } = this.props
-    const { errorMsg, score } = this.state
+    const { errorMsg, score, answers } = this.state
 
     if (score) {
       return (
@@ -67,7 +67,7 @@ class Quiz extends React.Component {
             {errorMsg}
           </Notification>}
         {quiz.questions && quiz.questions.map(question =>
-          <Question key={question.id} question={question} onAnswer={e => this.handleAnswer(e)} />)}
+          <Question key={question.id} question={question} currentAnswer={answers[question.id]} onAnswer={e => this.handleAnswer(e)} />)}
         <Control>
           <Button isColor='primary' onClick={e => this.handleSubmit(e)}>Submit Quiz</Button>
         </Control>
@@ -91,7 +91,7 @@ Quiz.propTypes = {
   }).isRequired
 }
 
-const Question = ({ question, onAnswer }) => {
+const Question = ({ question, onAnswer, currentAnswer }) => {
   return (
     <div className='Question'>
       <Subtitle><ReactMarkdown source={question.text} /></Subtitle>
@@ -105,7 +105,8 @@ const Question = ({ question, onAnswer }) => {
                     data-question-id={question.id}
                     name={`q-${question.id}`}
                     value={answer.id}
-                    onClick={onAnswer}>
+                    checked={String(answer.id) === String(currentAnswer)}
+                    onChange={onAnswer}>
                     <ReactMarkdown
                       className='markdown'
                       source={answer.text}

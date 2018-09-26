@@ -21,7 +21,6 @@ class Login extends React.Component {
     data.login(email, password)
       .then(user => this.props.setCurrentUser(user))
       .catch(err => {
-        console.log(err)
         this.setState({
           errorMsg: err.message
         })
